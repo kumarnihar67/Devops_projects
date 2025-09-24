@@ -1,0 +1,18 @@
+
+install_docker.sh
+
+#!/bin/bash
+yum update -y
+amazon-linux-extras install docker -y
+service docker start
+usermod -a -G docker ec2-user
+
+# Install git & clone the repo (optional: use your GitHub)
+yum install git -y
+cd /home/ec2-user
+git clone https://github.com/YOUR_GITHUB/aws-docker-terraform.git
+cd aws-docker-terraform/docker
+
+# Build and run the Docker container
+docker build -t flaskapp .
+docker run -d -p 5000:5000 flaskapp
