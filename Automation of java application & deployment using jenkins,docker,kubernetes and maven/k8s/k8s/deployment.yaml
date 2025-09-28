@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ekart-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ekart
+  template:
+    metadata:
+      labels:
+        app: ekart
+    spec:
+      containers:
+      - name: ekart-container
+        image: ekart-app:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
